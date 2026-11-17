@@ -1,0 +1,11 @@
+.git
+**/node_modules
+**/dist
+backend/vendor
+backend/.env
+backend/.env.*
+backend/storage/app/public
+backend/storage/logs
+backend/.claude
+backend/.mcp.json
+backend/boost.json

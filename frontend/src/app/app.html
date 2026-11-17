@@ -1,0 +1,56 @@
+<header class="topbar">
+  <a class="brand" routerLink="/" aria-label="Forum Section UIDT-EPT, accueil">
+    <img src="logo-forum-section-uidt-ept.png" alt="" width="50" height="50" />
+    <span class="brand-copy"><strong>Forum Section</strong><small>UIDT-EPT</small></span>
+  </a>
+  <nav aria-label="Navigation principale">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Questions</a>
+    @if (auth.user(); as user) {
+      <a routerLink="/profile" routerLinkActive="active">Mon profil</a>
+      @if (user.role === 'admin') {
+        <a routerLink="/admin" routerLinkActive="active">Administration</a>
+      }
+      <span class="user-identity"><app-user-avatar [user]="user" size="small" /><span class="user-name">{{ user.name }}</span></span>
+      <button class="link-button" type="button" (click)="logout()">Déconnexion</button>
+    } @else {
+      <a routerLink="/login" routerLinkActive="active">Connexion</a>
+    }
+    <button class="theme-button" type="button" (click)="toggleTheme()" [attr.aria-label]="darkTheme() ? 'Activer le thème clair' : 'Activer le thème sombre'">
+      {{ darkTheme() ? '☼' : '☾' }}
+    </button>
+  </nav>
+</header>
+<main class="page-shell">
+  @if (auth.error()) { <p class="error" role="alert">{{ auth.error() }}</p> }
+  @if (logoutError()) { <p class="error" role="alert">{{ logoutError() }}</p> }
+  <router-outlet />
+</main>
+<nav class="mobile-tabbar" aria-label="Navigation mobile">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" /></svg>
+    <span>Questions</span>
+  </a>
+  @if (auth.user(); as user) {
+    <a routerLink="/profile" routerLinkActive="active">
+      <app-user-avatar [user]="user" size="small" />
+      <span>Profil</span>
+    </a>
+    @if (user.role === 'admin') {
+      <a routerLink="/admin" routerLinkActive="active">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z" /><path d="m9 12 2 2 4-4" /></svg>
+        <span>Admin</span>
+      </a>
+    }
+    <button class="mobile-logout" type="button" (click)="logout()">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3" /><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" /></svg>
+      <span>Déconnexion</span>
+    </button>
+  } @else {
+    <a routerLink="/login" routerLinkActive="active">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /><path d="m10 17 5-5-5-5M15 12H3" /></svg>
+      <span>Connexion</span>
+    </a>
+  }
+</nav>
+<footer>Forum Section UIDT-EPT · Un espace d’entraide pour prolonger les séances d’apprentissage.</footer>
+<app-confirmation-dialog />

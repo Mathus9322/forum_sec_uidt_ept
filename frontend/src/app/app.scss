@@ -1,0 +1,230 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.topbar {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface) 94%, var(--accent-soft));
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  min-height: 82px;
+  padding: 0 max(24px, calc((100vw - 1120px) / 2));
+}
+
+.brand {
+  align-items: center;
+  color: var(--ink);
+  display: inline-flex;
+  gap: 11px;
+  text-decoration: none;
+}
+
+.brand img {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  flex: 0 0 50px;
+  height: 50px;
+  object-fit: contain;
+  width: 50px;
+}
+
+.brand-copy {
+  display: grid;
+  gap: 1px;
+}
+
+.brand-copy strong {
+  font-size: 1.04rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.brand-copy small {
+  color: var(--accent);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+nav {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+nav a,
+.link-button {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+}
+
+nav a.active,
+nav a:hover,
+.link-button:hover {
+  color: var(--accent);
+}
+
+.user-name {
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.user-identity {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.theme-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);  font-size: 1.1rem;
+  height: 38px;
+  min-height: 38px;
+  padding: 0;
+  width: 38px;
+}
+
+.theme-button:hover {
+  background: var(--canvas);
+}
+
+.page-shell {
+  margin: 0 auto;
+  max-width: 1120px;
+  min-height: calc(100vh - 138px);
+  padding: 42px 24px 64px;
+}
+
+.mobile-tabbar {
+  display: none;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 22px 24px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 18px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+
+  nav:not(.mobile-tabbar) > a,
+  nav:not(.mobile-tabbar) > .user-name,
+  nav:not(.mobile-tabbar) > .user-identity,
+  nav:not(.mobile-tabbar) > .link-button {
+    display: none;
+  }
+
+  .mobile-tabbar {
+    align-items: stretch;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    bottom: 0;
+    box-shadow: 0 -6px 24px rgb(48 35 31 / 8%);
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    left: 0;
+    padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
+    position: fixed;
+    right: 0;
+    z-index: 20;
+  }
+
+  .mobile-tabbar a,
+  .mobile-tabbar button {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 9px;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    font-size: 0.66rem;
+    font-weight: 700;
+    gap: 4px;
+    justify-content: center;
+    min-height: 52px;
+    min-width: 0;
+    padding: 5px 3px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .mobile-tabbar a.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .mobile-tabbar button:hover {
+    background: var(--canvas);
+    color: var(--accent);
+  }
+
+  .mobile-tabbar svg {
+    fill: none;
+    height: 21px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+    width: 21px;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .brand img {
+    flex-basis: 42px;
+    height: 42px;
+    width: 42px;
+  }
+
+  .brand-copy strong {
+    font-size: 0.94rem;
+  }
+
+  .page-shell {
+    padding: 28px 18px 32px;
+  }
+
+  footer {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar {
+    justify-content: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+}

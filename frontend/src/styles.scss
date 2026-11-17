@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light;
+  --accent: #a84628;
+  --accent-dark: #84331d;
+  --accent-soft: #f8e8df;
+  --ink: #30231f;
+  --muted: #78645b;
+  --line: #e9dcd4;
+  --surface: #ffffff;
+  --canvas: #faf6f2;
+  --danger: #a53d3d;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+.button {
+  align-items: center;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 42px;
+  padding: 9px 16px;
+  text-decoration: none;
+  transition: background 120ms ease, transform 120ms ease;
+}
+
+button:hover,
+.button:hover {
+  background: var(--accent-dark);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.button.secondary,
+button.secondary {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.button.secondary:hover,
+button.secondary:hover {
+  background: var(--canvas);
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 8px 26px rgb(23 43 43 / 4%);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.error {
+  color: var(--danger);
+}
+
+.success {
+  color: var(--accent);
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field label {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.field input,
+.field textarea,
+.field select,
+.filters input,
+.filters select {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  min-height: 44px;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.field textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus,
+.filters input:focus,
+.filters select:focus {
+  border-color: var(--accent);
+  outline: 3px solid color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --accent: #ec9877;
+  --accent-dark: #f4ae90;
+  --accent-soft: #40271f;
+  --ink: #f2e7e1;
+  --muted: #c1a99e;
+  --line: #49372f;
+  --surface: #241c18;
+  --canvas: #17120f;
+  --danger: #ff9a91;
+}
+
+:root[data-theme='dark'] button,
+:root[data-theme='dark'] .button { color: #29130e; }
+:root[data-theme='dark'] .button.secondary,
+:root[data-theme='dark'] button.secondary { color: var(--ink); }
