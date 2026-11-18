@@ -31,4 +31,4 @@ RUN composer dump-autoload --no-dev --optimize --no-interaction \
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "set -eu; HOST=${RENDER_EXTERNAL_HOSTNAME:-forum-sec-uidt-ept.onrender.com}; export APP_URL=https://$HOST FRONTEND_URL=https://$HOST SANCTUM_STATEFUL_DOMAINS=$HOST; mkdir -p storage/app/public; chown -R www-data:www-data storage/app/public; php artisan migrate --force; php artisan db:seed --force; exec apache2-foreground"]
+CMD ["sh", "-c", "set -eu; HOST=${APP_DOMAIN:-${RENDER_EXTERNAL_HOSTNAME:-forum-sec-uidt-ept.onrender.com}}; STATEFUL=${SANCTUM_STATEFUL_DOMAINS:-$HOST}; export APP_URL=https://$HOST FRONTEND_URL=https://$HOST SANCTUM_STATEFUL_DOMAINS=$STATEFUL; mkdir -p storage/app/public; chown -R www-data:www-data storage/app/public; php artisan migrate --force; php artisan db:seed --force; exec apache2-foreground"]

@@ -17,6 +17,10 @@ services:
         value: "false"
       - key: APP_KEY
         generateValue: true
+      - key: APP_DOMAIN
+        value: forumuidteptuidt.app
+      - key: SANCTUM_STATEFUL_DOMAINS
+        value: forumuidteptuidt.app,forum-sec-uidt-ept.onrender.com
       - key: SEED_ADMIN_EMAIL
         sync: false
       - key: SEED_ADMIN_PASSWORD
