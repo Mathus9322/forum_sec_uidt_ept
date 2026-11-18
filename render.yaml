@@ -17,6 +17,10 @@ services:
         value: "false"
       - key: APP_KEY
         generateValue: true
+      - key: SEED_ADMIN_EMAIL
+        sync: false
+      - key: SEED_ADMIN_PASSWORD
+        sync: false
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_URL

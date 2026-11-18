@@ -54,7 +54,7 @@ class QuestionsSeeder extends Seeder
             $answers = $attributes['answers'];
             unset($attributes['author'], $attributes['session'], $attributes['answers']);
 
-            $question = Question::updateOrCreate(
+            $question = Question::firstOrCreate(
                 [
                     'title' => $attributes['title'],
                     'user_id' => User::where('email', $authorEmail)->value('id'),
@@ -68,20 +68,20 @@ class QuestionsSeeder extends Seeder
             );
 
             foreach ($answers as $answerAttributes) {
-                Answer::updateOrCreate(
+                Answer::firstOrCreate(
                     [
                         'question_id' => $question->id,
                         'user_id' => User::where('email', $answerAttributes['author'])->value('id'),
                     ],
                     [
                         'content' => $answerAttributes['content'],
-                        'accepted' => false,
+                        'accepted' => $question->wasRecentlyCreated && $answerAttributes['accepted'],
                     ],
                 );
             }
 
             $acceptedAnswer = collect($answers)->firstWhere('accepted', true);
-            if ($acceptedAnswer) {
+            if ($question->wasRecentlyCreated && $acceptedAnswer) {
                 $question->answers()->update(['accepted' => false]);
                 $question->answers()
                     ->where('user_id', User::where('email', $acceptedAnswer['author'])->value('id'))

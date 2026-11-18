@@ -41,14 +41,16 @@ class LearningSessionsSeeder extends Seeder
             $moderatorEmails = $attributes['moderators'];
             unset($attributes['moderators']);
 
-            $session = LearningSession::updateOrCreate(
+            $session = LearningSession::firstOrCreate(
                 ['title' => $attributes['title']],
                 $attributes,
             );
 
-            $session->moderators()->sync(
-                User::whereIn('email', $moderatorEmails)->pluck('id'),
-            );
+            if ($session->wasRecentlyCreated) {
+                $session->moderators()->sync(
+                    User::whereIn('email', $moderatorEmails)->pluck('id'),
+                );
+            }
         }
     }
 }

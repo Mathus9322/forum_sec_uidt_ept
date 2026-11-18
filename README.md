@@ -35,7 +35,7 @@ php artisan serve --host=127.0.0.1 --port=8000
 
 La configuration `.env.example` utilise SQLite, le courrier journalisé et l’adresse locale d’Angular. Les liens de réinitialisation en développement apparaissent dans `backend\storage\logs\laravel.log`.
 
-En environnement `local` ou `testing`, les seeders ajoutent des comptes de démonstration, trois séances et des questions/réponses. Comptes locaux : `admin@uidt-ept.test`, `aminata@uidt-ept.test`, `mamadou@uidt-ept.test`, `fatou@uidt-ept.test` et `ibrahima@uidt-ept.test` — mot de passe `password`. Ces identifiants sont réservés au développement et ne sont pas créés en production. `php artisan db:seed` peut être relancé sans dupliquer les données.
+Les seeders ajoutent des comptes de démonstration, trois séances et des questions/réponses. En local et en test, les comptes `admin@uidt-ept.test`, `aminata@uidt-ept.test`, `mamadou@uidt-ept.test`, `fatou@uidt-ept.test` et `ibrahima@uidt-ept.test` utilisent le mot de passe `password`. En production, les comptes de démonstration non administrateurs reçoivent des mots de passe aléatoires et l'administrateur utilise les variables `SEED_ADMIN_EMAIL` et `SEED_ADMIN_PASSWORD`. `php artisan db:seed` peut être relancé sans écraser les données déjà modifiées.
 
 Terminal 2 — Angular :
 
@@ -86,5 +86,5 @@ Définir `APP_KEY`, `APP_ENV=production`, `APP_DEBUG=false`, une base PostgreSQL
 
 ### Déployer sur Render
 
-Le Blueprint [`render.yaml`](./render.yaml) déploie Angular et Laravel dans un même service Docker, avec PostgreSQL. Pour l’utiliser, pousser le dépôt sur GitHub puis choisir **New > Blueprint** dans Render et sélectionner ce dépôt. La configuration crée une base PostgreSQL et un disque persistant pour les photos de profil ; ces ressources utilisent des offres payantes Render. Les migrations Laravel sont exécutées au démarrage du service.
+Le Blueprint [`render.yaml`](./render.yaml) déploie Angular et Laravel dans un même service Docker, avec PostgreSQL. Pour l’utiliser, pousser le dépôt sur GitHub puis choisir **New > Blueprint** dans Render et sélectionner ce dépôt. Avant le premier déploiement, renseigner `SEED_ADMIN_EMAIL` et `SEED_ADMIN_PASSWORD` dans les variables du service Render ; le mot de passe doit comporter au moins 16 caractères. La configuration crée une base PostgreSQL et un disque persistant pour les photos de profil ; ces ressources utilisent des offres payantes Render. Les migrations et les seeders sont exécutés au démarrage du service.
 "# forum_sec_uidt_ept" 
