@@ -1,11 +1,3 @@
-FROM node:22-alpine AS frontend
-
-WORKDIR /app/frontend
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci
-COPY frontend/ ./
-RUN npm run build
-
 FROM php:8.4-apache
 
 RUN apt-get update \
@@ -23,7 +15,6 @@ COPY backend/composer.json backend/composer.lock ./
 RUN composer install --no-dev --no-interaction --no-scripts --prefer-dist
 
 COPY backend/ ./
-COPY --from=frontend /app/frontend/dist/frontend/browser/ /var/www/html/public/
 
 RUN composer dump-autoload --no-dev --optimize --no-interaction \
     && mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views \

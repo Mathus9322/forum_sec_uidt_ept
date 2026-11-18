@@ -86,5 +86,5 @@ Définir `APP_KEY`, `APP_ENV=production`, `APP_DEBUG=false`, une base PostgreSQL
 
 ### Déployer sur Render
 
-Le Blueprint [`render.yaml`](./render.yaml) déploie Angular et Laravel dans un même service Docker, avec PostgreSQL. Pour l’utiliser, pousser le dépôt sur GitHub puis choisir **New > Blueprint** dans Render et sélectionner ce dépôt. Avant le premier déploiement, renseigner `SEED_ADMIN_EMAIL` et `SEED_ADMIN_PASSWORD` dans les variables du service Render ; le mot de passe doit comporter au moins 16 caractères. La configuration crée une base PostgreSQL et un disque persistant pour les photos de profil ; ces ressources utilisent des offres payantes Render. Les migrations et les seeders sont exécutés au démarrage du service.
+Pour déployer PostgreSQL, l’API Laravel et Angular comme trois services séparés, suivre le [guide détaillé de déploiement Render](./docs/deploiement-render.md). La séparation nécessite de configurer l’URL de l’API, CORS et les cookies Sanctum avant le déploiement du frontend.
 "# forum_sec_uidt_ept" 
